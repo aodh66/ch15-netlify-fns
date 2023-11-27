@@ -4,4 +4,16 @@ const render = (message = "", node = messageNode) => {
     messageNode.textContent = message
 }
 
-render('Hello')
+const getData = async () => {
+    try {
+        const response = await fetch('/.netlify/functions/hello-world')
+        if(!response.ok) throw response
+        const data = await response.json()
+        render(data.message)
+    } catch(err) {
+
+    }
+}
+
+// render('Hello')
+getData()
